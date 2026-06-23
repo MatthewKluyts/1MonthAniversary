@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isUnlocked } from "@/lib/unlock";
+import Timeline from "@/components/Timeline";
 
 export default function SitePage() {
   const router = useRouter();
@@ -19,13 +20,21 @@ export default function SitePage() {
   if (!ready) return null;
 
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-rose-50 via-white to-rose-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-rose-950 text-zinc-900 dark:text-zinc-100">
-      <p className="text-sm uppercase tracking-[0.3em] text-rose-400 mb-4">
-        one month
-      </p>
-      <h1 className="text-4xl font-serif italic text-center">
-        hi my love &mdash; the rest is coming soon
-      </h1>
+    <div className="min-h-dvh bg-gradient-to-b from-rose-50 via-white to-rose-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-rose-950 text-zinc-900 dark:text-zinc-100">
+      <header className="px-6 pt-20 pb-8 text-center">
+        <p className="text-sm uppercase tracking-[0.3em] text-rose-400 mb-4">
+          one month with you
+        </p>
+        <h1 className="font-serif italic text-4xl sm:text-5xl">
+          hi my love
+        </h1>
+      </header>
+
+      <Timeline />
+
+      <footer className="px-6 py-16 text-center text-sm text-zinc-500">
+        more coming soon ❤️
+      </footer>
     </div>
   );
 }
