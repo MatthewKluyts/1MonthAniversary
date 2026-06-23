@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isUnlocked } from "@/lib/unlock";
 import Timeline from "@/components/Timeline";
+import Letter from "@/components/Letter";
 
 export default function SitePage() {
   const router = useRouter();
@@ -32,8 +33,10 @@ export default function SitePage() {
 
       <Timeline />
 
+      <Letter />
+
       <footer className="px-6 py-16 text-center text-sm text-zinc-500">
-        more coming soon ❤️
+        ❤️
       </footer>
     </div>
   );
