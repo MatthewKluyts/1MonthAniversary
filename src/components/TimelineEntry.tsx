@@ -30,10 +30,11 @@ export default function TimelineEntry({
     </div>
   );
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   const photoBlock = entry.photo ? (
     <div className="overflow-hidden rounded-2xl shadow-md">
       <Image
-        src={entry.photo}
+        src={`${basePath}${entry.photo}`}
         alt={entry.alt ?? entry.title}
         width={600}
         height={800}
