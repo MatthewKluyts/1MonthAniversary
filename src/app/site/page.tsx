@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { isUnlocked } from "@/lib/unlock";
 import Timeline from "@/components/Timeline";
 import Letter from "@/components/Letter";
@@ -21,7 +22,12 @@ export default function SitePage() {
   if (!ready) return null;
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-rose-50 via-white to-rose-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-rose-950 text-zinc-900 dark:text-zinc-100">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.9, ease: "easeOut" }}
+      className="min-h-dvh bg-gradient-to-b from-rose-50 via-[#fff7f1] to-rose-100 dark:from-zinc-950 dark:via-[#0d0608] dark:to-rose-950"
+    >
       <header className="px-6 pt-20 pb-8 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-rose-400 mb-4">
           one month with you
@@ -36,8 +42,8 @@ export default function SitePage() {
       <Letter />
 
       <footer className="px-6 py-16 text-center text-sm text-zinc-500">
-        ❤️
+        ❤
       </footer>
-    </div>
+    </motion.div>
   );
 }

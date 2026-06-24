@@ -67,10 +67,14 @@ export default function DateGate() {
   }
 
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-rose-50 via-white to-rose-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-rose-950 text-zinc-900 dark:text-zinc-100">
+    <motion.div
+      animate={{ opacity: status === "right" ? 0 : 1 }}
+      transition={{ delay: status === "right" ? 1.2 : 0, duration: 0.6 }}
+      className="flex min-h-dvh flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-rose-50 via-[#fff7f1] to-rose-100 dark:from-zinc-950 dark:via-[#0d0608] dark:to-rose-950"
+    >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={status === "right" ? { opacity: 0, y: -8 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-sm"
       >
@@ -137,7 +141,7 @@ export default function DateGate() {
       <AnimatePresence>
         {status === "right" && <HeartBurst />}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
