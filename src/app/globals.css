@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
+/* Force light mode — never auto-darken from system preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  color-scheme: light;
   --background: #fff7f1;
   --foreground: #2b1a1f;
 }
@@ -10,13 +14,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0d0608;
-    --foreground: #f4e9eb;
-  }
 }
 
 html,
