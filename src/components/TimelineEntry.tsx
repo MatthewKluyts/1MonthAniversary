@@ -31,17 +31,36 @@ export default function TimelineEntry({
   );
 
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const photoBlock = entry.photo ? (
-    <div className="overflow-hidden rounded-2xl shadow-md">
-      <Image
-        src={`${basePath}${entry.photo}`}
-        alt={entry.alt ?? entry.title}
-        width={600}
-        height={800}
-        className="w-full h-auto object-cover"
-      />
-    </div>
-  ) : null;
+
+  let mediaBlock: React.ReactNode = null;
+  if (entry.video) {
+    mediaBlock = (
+      <div className="overflow-hidden rounded-2xl shadow-md">
+        <video
+          src={`${basePath}${entry.video}`}
+          aria-label={entry.alt ?? entry.title}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="w-full h-auto object-cover block"
+        />
+      </div>
+    );
+  } else if (entry.photo) {
+    mediaBlock = (
+      <div className="overflow-hidden rounded-2xl shadow-md">
+        <Image
+          src={`${basePath}${entry.photo}`}
+          alt={entry.alt ?? entry.title}
+          width={600}
+          height={800}
+          className="w-full h-auto object-cover"
+        />
+      </div>
+    );
+  }
 
   return (
     <motion.li
@@ -60,17 +79,17 @@ export default function TimelineEntry({
       {/* mobile layout: stacked text then photo */}
       <div className="sm:hidden space-y-4">
         {textBlock}
-        {photoBlock}
+        {mediaBlock}
       </div>
 
       {/* tablet+ layout: text in one column, photo in the opposite */}
       <div className="hidden sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-8 sm:items-start">
-        <div>{isLeft ? textBlock : photoBlock}</div>
+        <div>{isLeft ? textBlock : mediaBlock}</div>
         <span
           aria-hidden
           className="relative h-3 w-3 mt-2 mx-auto rounded-full bg-rose-400 ring-4 ring-rose-100 dark:ring-rose-950"
         />
-        <div>{isLeft ? photoBlock : textBlock}</div>
+        <div>{isLeft ? mediaBlock : textBlock}</div>
       </div>
     </motion.li>
   );

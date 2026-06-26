@@ -23,7 +23,7 @@ const MONTHS = [
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 
 const CURRENT_YEAR = 2026;
-const YEARS = [CURRENT_YEAR, CURRENT_YEAR - 1];
+const YEARS = [CURRENT_YEAR, CURRENT_YEAR - 1, CURRENT_YEAR - 2, CURRENT_YEAR - 3, CURRENT_YEAR - 4];
 
 type Status = "idle" | "checking" | "wrong" | "right";
 
@@ -46,8 +46,8 @@ export default function DateGate() {
 
   const hint = useMemo(() => {
     if (status !== "wrong") return null;
-    if (attempts >= 3) return "hint: it was a Friday · think back to that walk ❤️";
-    if (attempts >= 2) return "think back to the day i finally asked…";
+    if (attempts >= 3) return "bro dont tell me you forgot the date.";
+    if (attempts >= 2) return "come on, you know it.";
     return "not quite — try again";
   }, [status, attempts]);
 
@@ -67,20 +67,16 @@ export default function DateGate() {
   }
 
   return (
-    <motion.div
-      animate={{ opacity: status === "right" ? 0 : 1 }}
-      transition={{ delay: status === "right" ? 1.2 : 0, duration: 0.6 }}
-      className="flex min-h-dvh flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-rose-50 via-[#fff7f1] to-rose-100 dark:from-zinc-950 dark:via-[#0d0608] dark:to-rose-950"
-    >
+    <div className="flex min-h-dvh flex-col items-center justify-center px-6 py-12 bg-gradient-to-b from-rose-50 via-white to-rose-100 dark:from-zinc-950 dark:via-zinc-900 dark:to-rose-950 text-zinc-900 dark:text-zinc-100">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={status === "right" ? { opacity: 0, y: -8 } : { opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-sm"
       >
         <div className="mb-10 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-rose-400 mb-4">
-            for you
+            for neelam
           </p>
           <h1 className="text-3xl font-serif italic leading-snug">
             what was the date i asked you to be mine?
@@ -141,7 +137,7 @@ export default function DateGate() {
       <AnimatePresence>
         {status === "right" && <HeartBurst />}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
