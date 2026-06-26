@@ -22,7 +22,7 @@ export const timeline: TimelineEntry[] = [
     date: "the day we met",
     title: "the very first time",
     caption:
-      "all i can remember is walking into beer yard and seeing you. i was so nervous even look at, but somehow managed to still speak to you. best decision i've made.",
+      "all i can remember is walking into beer yard and seeing you. i was too nervous even look at you, but somehow managed to still speak to you. best decision i've made.",
     photo: "/photos/5.jpg",
   },
   {

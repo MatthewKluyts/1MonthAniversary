@@ -31,36 +31,41 @@ export default function TimelineEntry({
   );
 
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const tilt = index % 2 === 0 ? "-rotate-2" : "rotate-2";
 
-  let mediaBlock: React.ReactNode = null;
+  let mediaInner: React.ReactNode = null;
   if (entry.video) {
-    mediaBlock = (
-      <div className="overflow-hidden rounded-2xl shadow-md">
-        <video
-          src={`${basePath}${entry.video}`}
-          aria-label={entry.alt ?? entry.title}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="w-full h-auto object-cover block"
-        />
-      </div>
+    mediaInner = (
+      <video
+        src={`${basePath}${entry.video}`}
+        aria-label={entry.alt ?? entry.title}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        className="w-full h-auto object-cover block"
+      />
     );
   } else if (entry.photo) {
-    mediaBlock = (
-      <div className="overflow-hidden rounded-2xl shadow-md">
-        <Image
-          src={`${basePath}${entry.photo}`}
-          alt={entry.alt ?? entry.title}
-          width={600}
-          height={800}
-          className="w-full h-auto object-cover"
-        />
-      </div>
+    mediaInner = (
+      <Image
+        src={`${basePath}${entry.photo}`}
+        alt={entry.alt ?? entry.title}
+        width={600}
+        height={800}
+        className="w-full h-auto object-cover block"
+      />
     );
   }
+
+  const mediaBlock = mediaInner ? (
+    <div
+      className={`relative bg-white dark:bg-zinc-100 p-3 pb-10 shadow-xl ${tilt} transition-transform hover:rotate-0 hover:scale-[1.02] duration-300`}
+    >
+      <div className="overflow-hidden">{mediaInner}</div>
+    </div>
+  ) : null;
 
   return (
     <motion.li
